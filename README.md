@@ -64,6 +64,7 @@ module "statefulset" {
 | `service_links`                                | No       | `false`          | Enable service links                               |
 | `subdomain`                                    | No       | `""`             | Subdomain for the pod                              |
 | `replicas`                                     | No       | `1`              | Amount of pods to deploy as part of statefulset    |
+| `pod_management_policy`                        | No       | `OrderedReady`   | How pods created during initial scaling            |
 | `pull_policy`                                  | No       | `IfNotPresent`   | Pull policy for the image                          |
 | `annotations`                                  | No       | `{}`             | Annotations to add to the statefulset              |
 | `template_annotations`                         | No       | `{}`             | Annotations to add to the template (recreate pods) |

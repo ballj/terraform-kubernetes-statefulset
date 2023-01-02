@@ -37,6 +37,7 @@ resource "kubernetes_stateful_set_v1" "stateful_set" {
     replicas               = var.replicas
     revision_history_limit = var.revision_history
     service_name           = kubernetes_service_v1.stateful_set.metadata[0].name
+    pod_management_policy  = var.pod_management_policy
     selector {
       match_labels = local.selector_labels
     }

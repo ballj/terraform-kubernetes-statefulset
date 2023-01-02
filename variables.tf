@@ -66,6 +66,16 @@ variable "replicas" {
   default     = 1
 }
 
+variable "pod_management_policy" {
+  type        = string
+  description = "How pods are created during initial scale up, when replacing pods on nodes, or when scaling down"
+  default     = "OrderedReady"
+  validation {
+    condition     = contains(["OrderedReady", "Parallel"], var.pod_management_policy)
+    error_message = "Valid values for var: pod_management_policy are (OrderedReady, Parallel)."
+  }
+}
+
 variable "pull_policy" {
   type        = string
   description = "Pull policy for the image"
