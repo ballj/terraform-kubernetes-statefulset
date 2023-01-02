@@ -179,6 +179,14 @@ See below for an example.
 | `container_port`                            | Yes      | N/A              | Port on the pod that application is listening on   |
 | `service_port`                              | No       | N/A              | If specifed, port is created on the service        |
 
+### Network Policy Variables
+
+| Variable                                    | Required | Default                 | Description                                 |
+| ------------------------------------------- | -------- | ----------------------- | ------------------------------------------- |
+| `network_policy_type`                       | No       | `["Ingress", "Egress"]` | Direction of network policy                 |
+| `network_policy_ingress`                    | No       | `[]`                    | Ingress policy to apply to deployment       |
+| `network_policy_egress`                     | No       | `[]`                    | Egress policy to apply to deployment        |
+
 ### Volume Variables
 
 If `volumes` is defined, a list of map is required with the variables.
