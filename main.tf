@@ -212,23 +212,23 @@ resource "kubernetes_stateful_set_v1" "stateful_set" {
           dynamic "resources" {
             for_each = length(var.resources_limits_cpu) > 0 || length(var.resources_limits_memory) > 0 || length(var.resources_requests_cpu) > 0 || length(var.resources_requests_memory) > 0 ? [1] : []
             content {
-            limits = length(var.resources_limits_cpu) > 0 && length(var.resources_limits_memory) > 0 ? {
+              limits = length(var.resources_limits_cpu) > 0 && length(var.resources_limits_memory) > 0 ? {
                 cpu    = var.resources_limits_cpu
                 memory = var.resources_limits_memory
-              } : length(var.resources_limits_cpu) > 0 ? {
-                cpu    = var.resources_limits_cpu
-              } : length(var.resources_limits_memory) > 0 ? {
+                } : length(var.resources_limits_cpu) > 0 ? {
+                cpu = var.resources_limits_cpu
+                } : length(var.resources_limits_memory) > 0 ? {
                 memory = var.resources_limits_memory
               } : {}
-            requests = length(var.resources_requests_cpu) > 0 && length(var.resources_requests_memory) > 0 ? {
-              cpu    = var.resources_requests_cpu
-              memory = var.resources_requests_memory
-            } : length(var.resources_limits_cpu) > 0 ? {
-              cpu    = var.resources_requests_cpu
-            } : length(var.resources_requests_memory) > 0 ? {
-              memory = var.resources_requests_memory
-            } : {}
-          }
+              requests = length(var.resources_requests_cpu) > 0 && length(var.resources_requests_memory) > 0 ? {
+                cpu    = var.resources_requests_cpu
+                memory = var.resources_requests_memory
+                } : length(var.resources_limits_cpu) > 0 ? {
+                cpu = var.resources_requests_cpu
+                } : length(var.resources_requests_memory) > 0 ? {
+                memory = var.resources_requests_memory
+              } : {}
+            }
           }
           dynamic "port" {
             for_each = var.ports
@@ -481,14 +481,17 @@ resource "kubernetes_stateful_set_v1" "stateful_set" {
           }
         }
         dynamic "volume" {
-          for_each = var.custom_certificate_authority
+          for_each = length(var.custom_certificate_authority) > 0 ? [1] : []
           content {
             name = "custom-ca-certificates"
             projected {
               default_mode = "0444"
-              sources {
-                secret {
-                  name = volume.value
+              dynamic "sources" {
+                for_each = var.custom_certificate_authority
+                content {
+                  secret {
+                    name = sources.value
+                  }
                 }
               }
             }
