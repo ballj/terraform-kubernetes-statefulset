@@ -237,6 +237,22 @@ resource "kubernetes_stateful_set_v1" "stateful_set" {
               container_port = port.value["container_port"]
             }
           }
+          env {
+            name = "POD_IP"
+            value_from {
+              field_ref {
+                field_path = "status.podIP"
+              }
+            }
+          }
+          env {
+            name = "POD_NAME"
+            value_from {
+              field_ref {
+                field_path = "metadata.name"
+              }
+            }
+          }
           dynamic "env" {
             for_each = [for env_var in var.env_secret : {
               name   = env_var.name
@@ -258,14 +274,6 @@ resource "kubernetes_stateful_set_v1" "stateful_set" {
             content {
               name  = env.key
               value = env.value
-            }
-          }
-          env {
-            name = "POD_IP"
-            value_from {
-              field_ref {
-                field_path = "status.podIP"
-              }
             }
           }
           dynamic "readiness_probe" {
