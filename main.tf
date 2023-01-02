@@ -506,11 +506,12 @@ resource "kubernetes_service_v1" "stateful_set" {
     annotations = var.service_annotations
   }
   spec {
-    selector                = local.selector_labels
-    session_affinity        = var.service_session_affinity
-    type                    = var.service_type
-    external_traffic_policy = contains(["LoadBalancer", "NodePort"], var.service_type) ? var.service_traffic_policy : null
-    load_balancer_ip        = length(var.service_loadbalancer_ip) > 0 ? var.service_loadbalancer_ip : null
+    selector                    = local.selector_labels
+    session_affinity            = var.service_session_affinity
+    type                        = var.service_type
+    external_traffic_policy     = contains(["LoadBalancer", "NodePort"], var.service_type) ? var.service_traffic_policy : null
+    load_balancer_ip            = length(var.service_loadbalancer_ip) > 0 ? var.service_loadbalancer_ip : null
+    publish_not_ready_addresses = var.service_publish_not_ready_addresses
     dynamic "port" {
       for_each = [for port in var.ports : {
         name           = port.name

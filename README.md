@@ -165,6 +165,7 @@ module "statefulset" {
 | `service_session_affinity`                  | No       | `None`           | Session persistence setting                        |
 | `service_traffic_policy`                    | No       | `Local`          | External traffic policy - `Local` or `External`    |
 | `service_loadbalancer_ip`                   | No       | `""`             | IP address to request from the loadbalancer        |
+| `service_publish_not_ready_addresses`       | No       | `false`          | DNS must publish the notReadyAddresses             |
 | `labels`                                    | No       | N/A              | Common labels to add to all objects - See example  |
 
 ### Port Variables

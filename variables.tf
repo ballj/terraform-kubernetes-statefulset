@@ -528,6 +528,12 @@ variable "service_traffic_policy" {
   default     = "Local"
 }
 
+variable "service_publish_not_ready_addresses" {
+  type        = bool
+  description = "DNS must publish the notReadyAddresses of subsets for the Endpoints"
+  default     = false
+}
+
 variable "init_volume_permissions_enabled" {
   description = "Container to set volume permissions on pod startup"
   default     = true
@@ -613,7 +619,6 @@ variable "init_connectivity_image_pull_policy" {
   description = "Pull policy to use for the init container"
   default     = "IfNotPresent"
 }
-
 
 variable "network_policy_ingress" {
   type        = list(any)
