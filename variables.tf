@@ -144,6 +144,12 @@ variable "security_context_gid" {
   default     = 1000
 }
 
+variable "security_context_fsgroup" {
+  type        = number
+  description = "fsGroup to run pod as"
+  default     = 1000
+}
+
 variable "security_context_container_enabled" {
   type        = bool
   description = "Enable the security context at container level"

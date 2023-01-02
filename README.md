@@ -74,6 +74,7 @@ module "statefulset" {
 | `security_context_enabled`                     | No       | `true`           | Enable security context at pod level               |
 | `security_context_uid`                         | No       | `1000`           | User to run statefulset as                         |
 | `security_context_uid`                         | No       | `1000`           | Group to run statefulset as                        |
+| `security_context_fsgroup`                     | No       | `1000`           | fsGroup to run pod as                              |
 | `security_context_container_enabled`           | No       | `false`          | Enable security context at container level         |
 | `security_context_container_capabilities_add`  | No       | `null`           | Added capabilities as                              |
 | `security_context_container_capabilities_drop` | No       | `null`           | Removed capabilities as                            |

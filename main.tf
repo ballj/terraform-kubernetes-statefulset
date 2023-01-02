@@ -409,6 +409,7 @@ resource "kubernetes_stateful_set_v1" "stateful_set" {
             run_as_non_root = true
             run_as_user     = var.security_context_uid
             run_as_group    = var.security_context_gid
+            fs_group        = var.security_context_fsgroup
           }
         }
         dynamic "volume" {
