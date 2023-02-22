@@ -647,3 +647,15 @@ variable "network_policy_type" {
   description = "Direction of network policy"
   default     = ["Ingress", "Egress"]
 }
+
+variable "container_tty" {
+  type        = bool
+  description = "Enable container tty"
+  default     = false
+}
+
+variable "container_stdin" {
+  type        = bool
+  description = "Enable container stdin"
+  default     = false
+}

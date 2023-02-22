@@ -165,6 +165,8 @@ resource "kubernetes_stateful_set_v1" "stateful_set" {
           command           = var.command
           args              = var.arguments
           image_pull_policy = var.pull_policy
+          tty   = var.container_tty
+          stdin = var.container_stdin
           lifecycle {
             dynamic "post_start" {
               for_each = length(var.post_start_type) > 0 ? [1] : []
